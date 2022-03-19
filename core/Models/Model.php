@@ -124,13 +124,13 @@ abstract class Model extends \mysqli
      * @param $value - значение которое проверяется
      * @return bool
      */
-    public function unique_column($column, $value)
+    public function isNotUniqueColumn($column, $value)
     {
         $column = $this->real_escape_string(trim($column));
         $value = $this->real_escape_string(trim($value));
         $query = "SELECT COUNT(*) as `count` FROM `{$this->table}` WHERE `{$column}` = '{$value}'";
         $result = $this->query($query)->fetch_assoc();
-        return $result->count > 0;
+        return $result['count'] > 0;
     }
 
     public function __destruct()
